@@ -34,15 +34,22 @@ function longestSentence(text) {
 
   // locate the longest sentence in all the sentences
   let longestSentence = sentences.reduce((prevSentence, currSentence) => {
-    return prevSentence.length > currSentence.length ? prevSentence : currSentence;
+    let prevWordArr = splitSentenceIntoWords(prevSentence);
+    let currWordArr = splitSentenceIntoWords(currSentence);
+    return prevWordArr.length > currWordArr.length ? prevSentence : currSentence;
   });
 
-  // find and count the number of words in the longest sentence
-  let longestSentenceCount = longestSentence.match(/[^ .?!]+/g).length;
+  // count the number of words in the longest sentence
+  let longestSentenceCount = splitSentenceIntoWords(longestSentence).length
 
   // log the necessary output
   console.log(longestSentence + '\n');
   console.log(`The longest sentence has ${longestSentenceCount} words`);
+}
+
+// helper function to split a sentence into words
+function splitSentenceIntoWords(sentence) {
+  return sentence.match(/[^ .?!]+/g);
 }
 
 longestSentence(longText);
